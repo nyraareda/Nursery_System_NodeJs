@@ -64,7 +64,8 @@ exports.updateTeacher = (req, res, next) => {
   };
 
   schemaTeacher
-    .findByIdAndUpdate(teacherId, updateData, { new: true })
+    .findByIdAndUpdate(teacherId ,{ $set: updateData }, // Use $set to update specific fields
+    { new: true })
     .then((teacherUpdate) => {
       if (!teacherUpdate) {
         return res.status(404).json({ data: "Teacher not found" });
@@ -94,7 +95,7 @@ exports.deleteTeacher = (req, res, next) => {
     .catch((error) => next(error));
 };
 exports.getSupervisorById = (req, res, next) => {
-  const supervisorId = req.params.id;
+  const supervisorId = req.params._id;
 
   schemaTeacher
     .find({ "supervisors._id": supervisorId }, { "supervisors.$": 1 })
