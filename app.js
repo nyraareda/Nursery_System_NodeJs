@@ -15,8 +15,8 @@ const server = express();
 // Serve static files
 server.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/nodenew")
+// Connect to MongoDB using environment variable
+mongoose.connect(process.env.DB_URL)
   .then(() => {
     console.log("DB connected");
 
@@ -47,7 +47,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/nodenew")
 
     // Middleware to parse JSON bodies
     server.use(express.json());
-// Process PATCH request to update child data
+    // Process PATCH request to update child data
 
     // Define routes
     server.use(loginRoute);
@@ -66,7 +66,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/nodenew")
       response.status(500).json({ data: "Internal Server Error" });
     });
 
-    // Start the server
+    // Start the server using the PORT environment variable
     const port = process.env.PORT || 8080;
     server.listen(port, () => {
       console.log("Server is listening on port", port);
