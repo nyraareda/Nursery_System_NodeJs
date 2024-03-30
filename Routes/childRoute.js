@@ -11,6 +11,7 @@ const {
 
 const router = express.Router();
 
+
 /**
  * @swagger
  * components:
@@ -56,7 +57,7 @@ const router = express.Router();
  *       bearerFormat: JWT
  */
 
-
+//Get all Childs
 /**
  * @swagger
  * /child:
@@ -78,7 +79,7 @@ const router = express.Router();
  *         description: Unauthorized
 */
 
-
+//Add new Child
 /**
  * @swagger
  * /child:
@@ -129,10 +130,7 @@ const router = express.Router();
  */
 
 
-
-
-
-
+//get by ID
 /**
  * @swagger
  * /child/{id}:
@@ -159,6 +157,8 @@ const router = express.Router();
  *         description: Unauthorized
  */
 
+
+//delete by ID
 /**
  * @swagger
  * /child/{id}:
@@ -196,6 +196,8 @@ const router = express.Router();
  *               $ref: '#/components/schemas/Message'
 */
 
+
+//update by id
 /**
  * @swagger
  * /child/{id}:
@@ -227,7 +229,7 @@ const router = express.Router();
  *               level:
  *                 type: string
  *                 enum: ['PreKG', 'KG1', 'KG2']
- *                 description: The updated level of the child
+*                 description: The updated level of the child
  *               address[city]:
  *                 type: string
  *                 description: The updated city in the address
@@ -241,11 +243,6 @@ const router = express.Router();
  *                 type: string
  *                 format: binary
  *                 description: The updated image of the child (optional). If not provided, the existing image will be retained.
- *             required:
- *               - fullName
- *               - age
- *               - level
- *               - address
  *     responses:
  *       '201':
  *         description: The child was successfully updated
@@ -259,6 +256,7 @@ const router = express.Router();
  *         description: Internal server error
  */
 
+
 router
   .route("/child")
   .all(isAdmin)
@@ -270,20 +268,5 @@ router
   .get(controller.getChildById)
   .delete(deleteValidator, validationResult, controller.deleteChild)
   .patch(upload, updateValidator, validationResult, controller.updateChild);
-
-module.exports = router;
-
-
-// router
-//   .route("/child")
-//   .get(controller.getAllChilds)
-//   .post(upload, insertValidator, validationResult, controller.insertChild);
-
-// router
-//   .route("/child/:id")
-//   .all(isAdmin)
-//   .get(controller.getChildById)
-//   .delete(deleteValidator, validationResult, controller.deleteChild)
-//   .patch(upload, updateValidator, validationResult, controller.updateChild);
 
 module.exports = router;
