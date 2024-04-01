@@ -45,22 +45,16 @@ mongoose.connect(process.env.DB_URL)
       next();
     });
 
-    // Middleware to parse JSON bodies
     server.use(express.json());
-    // Process PATCH request to update child data
-
-    // Define routes
     server.use(loginRoute);
     server.use(teacherRoute);
     server.use(childRoute);
     server.use(classRoute);
 
-    // 404 Error handler
     server.use((request, response, next) => {
       response.status(404).json({ data: "Not Found" });
     });
 
-    // Error handling middleware
     server.use((error, request, response, next) => {
       console.error(error.stack);
       response.status(500).json({ data: "Internal Server Error" });

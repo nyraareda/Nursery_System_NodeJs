@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-const schemaTeacher = require("../models/teacherModel"); // Import the schemaTeacher model
+const schemaTeacher = require("../models/teacherModel");
 
 
 
@@ -26,7 +26,6 @@ module.exports.isAdmin = (req, res, next) => {
 
     }
 }
-// module.exports=verifyToken
 module.exports.isTeacher=(req,res,next)=>{
     if(req.token.role=="Teacher"){
         next();
@@ -38,12 +37,10 @@ module.exports.isTeacher=(req,res,next)=>{
 
 module.exports.registerTeacher = (req, res, next) => {
     const { email, password } = req.body;
-    // Hash the password using bcrypt
     bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {
             return next(err);
         }
-        // Create a new teacher document in the database
         schemaTeacher.create({ email, password: hashedPassword })
             .then((teacher) => {
                 res.status(201).json({ message: "Teacher registered successfully" });

@@ -7,14 +7,13 @@ const classSchema = new mongoose.Schema({
     },
     supervisor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teacher' // Reference to the Teacher model
+        ref: 'Teacher'
     },
     children: [{
         type: Number,
-        ref: 'child', // Reference to the Child model
+        ref: 'child',
         required: true
     }]
 }, { timestamps: true });
 
-// Export the class model
 module.exports = mongoose.model("Class", classSchema);

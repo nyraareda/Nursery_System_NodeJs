@@ -42,8 +42,6 @@ exports.insertTeacher = async (req, res) => {
       password:hashedPass,
       image,
     });
-    // const token = await generateJWT({email: newUser.email, id: newUser._id, role: newUser.role});
-    // newUser.token = token;
 
     const savedTeacher = await newTeacher.save();
 

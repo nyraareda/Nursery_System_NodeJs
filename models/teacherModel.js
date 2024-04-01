@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Define schema for the teacher model
 const schemaTeacher = new mongoose.Schema(
   {
     id: mongoose.Schema.Types.ObjectId,

@@ -12,7 +12,7 @@ exports.getAllChilds=(req,res,next)=>{
 
 //retrieve specific child by id
 exports.getChildById = (req, res, next) => {
-    const childId = parseInt(req.params.id); // Parse the id parameter to a number
+    const childId = parseInt(req.params.id); // Parse id to a number
     childSchema.findOne({ id: childId })
         .then((child) => {
             if (!child) {
